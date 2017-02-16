@@ -5,6 +5,9 @@
  */
 package eddpractica1;
 
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+
 /**
  *
  * @author Hayrton
@@ -16,8 +19,15 @@ public class EDDPractica1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        try{
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+        }catch(Exception e){
+            
+        }
         Principal prin = new Principal();
         prin.setVisible(true);
+        
     }
     
 }
