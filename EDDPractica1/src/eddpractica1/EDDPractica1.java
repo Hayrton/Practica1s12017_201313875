@@ -5,6 +5,14 @@
  */
 package eddpractica1;
 
+import Nodos.Cabecera;
+import Nodos.Lateral;
+import Nodos.ListaHorizontal;
+import Nodos.ListaVertical;
+import Nodos.MatrizOrtogonal;
+import Nodos.NodoCabecera;
+import Nodos.NodoLateral;
+import Nodos.NodoM;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
@@ -27,6 +35,9 @@ public class EDDPractica1 {
         }
         Principal prin = new Principal();
         prin.setVisible(true);
+        
+        MatrizOrtogonal matriz = new MatrizOrtogonal();
+        matriz.llenar(3,3);
         
     }
     

@@ -5,6 +5,8 @@
  */
 package Varios;
 
+import Nodos.ListaCircular;
+import Nodos.ListaSimple;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -22,13 +24,13 @@ public class Metodos {
 
     public void abrirArchivo() {
         JFileChooser selector = new JFileChooser();
-        selector.setFileFilter(new Filtro("XML"));
+        selector.setFileFilter(new Filtro("xml"));
         selector.setDialogTitle("Leer Archivo");
         selector.setFileSelectionMode(0);
         int opcion = selector.showOpenDialog(selector);
         selector.setVisible(true);
         File archivo = selector.getSelectedFile();
-        if(JFileChooser.APPROVE_OPTION==opcion){
+        if (JFileChooser.APPROVE_OPTION == opcion) {
             LeerXML(archivo);
         }
     }
@@ -37,36 +39,74 @@ public class Metodos {
         SAXBuilder builder = new SAXBuilder();
 
         try {
-            Document document = (Document) builder.build(Archivo);
+            Document document = builder.build(Archivo);
             Element nodoraiz = document.getRootElement();
-            List list = nodoraiz.getChildren("scrabble");
-            for (int i = 0; i < list.size(); i++) {
-                Element scrabble = (Element) list.get(i);
-                String dimension = scrabble.getChildTextTrim("dimension");
-                List list_dobles = scrabble.getChildren();
-                List list_triples = scrabble.getChildren();
-                List diccionario = scrabble.getChildren();
-                for (int j = 0; j < list_dobles.size(); j++) {
-                    Element casilla = (Element) list_dobles.get(j);
-                    String x = casilla.getChildTextTrim("x");
-                    String y = casilla.getChildTextTrim("y");
-                }
-                for (int tri = 0; tri < list_dobles.size(); tri++) {
-                    Element casillat = (Element) list_triples.get(tri);
-                    String xt = casillat.getChildText("x");
-                    String yt = casillat.getChildText("y");
-                }
-                for (int d = 0; d < diccionario.size(); d++) {
-                    Element palabra = (Element) diccionario.get(d);
-                    String pal = palabra.getChildText("palabraq");
-                }
+            List<Element> list = nodoraiz.getChildren();
+            System.out.println("lectura xml");
+            for (Element hijo : list) {
+                List<Element> list_hijos = hijo.getChildren();
+                String name = hijo.getName();
+                String dato = hijo.getValue();
+                if (name.equals("dimension")) {
+                    System.out.println("nombre:  " + name + "   dimension:   " + dato);
+                } else if (name.equals("dobles")) {
+                    System.out.println("--------dobles------");
+                    for (Element hijos : list_hijos) {
+                        /*String nombre = hijos.getName();
+                        String dimension = hijos.getValue();
+                        System.out.println("nombresss:  " + nombre + "   dimension:   " + dimension);
+                         */
 
+                        List<Element> listh_hijos = hijos.getChildren();
+                        for (Element hi : listh_hijos) {
+                            String casillax = hi.getName();
+                            String datocasilla = hi.getValue();
+                            System.out.println("casilladoble:  " + casillax + "  dato:  " + datocasilla);
+                        }
+                    }
+                } else if (name.equals("triples")) {
+                    System.out.println("------triples-----");
+                    for (Element hijos : list_hijos) {
+                        /*
+                        String nombre = hijos.getName();
+                        String dimension = hijos.getValue();
+                        System.out.println("nombresss:  " + nombre + "   dimension:   " + dimension);
+                         */
+                        List<Element> listh_hijos = hijos.getChildren();
+                        for (Element hi : listh_hijos) {
+                            String casillax = hi.getName();
+                            String datocasilla = hi.getValue();
+                            System.out.println("casillatriple:  " + casillax + "  dato:  " + datocasilla);
+                        }
+                    }
+                } else if (name.equals("diccionario")) {
+                    for (Element hijos : list_hijos) {
+                        String nombre = hijos.getName();
+                        String dat = hijos.getValue();
+                        if (nombre.equals("palabra")) {
+                            addADiccionario(dat);
+                        }
+                    }
+
+                }
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (JDOMException jdomex) {
             System.out.println(jdomex.getMessage());
         }
+    }
+
+    private void addADiccionario(String palabras) {
+        ListaSimple diccionario = new ListaSimple();
+        diccionario.agregarAlInicio(palabras);
+        diccionario.MostarLista();
+    }
+
+    public void usuario(String user) {
+        ListaCircular circular = new ListaCircular();
+        circular.agregaralInicio(user);
+        circular.MostrarLista();
     }
 
 }

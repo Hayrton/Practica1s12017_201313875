@@ -5,6 +5,9 @@
  */
 package Forms;
 
+import Varios.Metodos;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Hayrton
@@ -14,6 +17,9 @@ public class Usuario extends javax.swing.JFrame {
     /**
      * Creates new form Usuario
      */
+    int contador=0;
+    Metodos mt = new Metodos();
+    
     public Usuario() {
         initComponents();
     }
@@ -29,36 +35,42 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        LblNombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        agregar = new javax.swing.JButton();
+        LblNoJugador = new javax.swing.JLabel();
+        NoJugador = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Ingrsar Jugadores");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Nombre de Jugador:");
+        LblNombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LblNombre.setText("Nombre de Jugador:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Agregar Jugador");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        agregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        agregar.setText("Agregar Jugador");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                agregarActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Numero de Jugadores:");
+        LblNoJugador.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LblNoJugador.setText("Numero de Jugadores:");
+
+        NoJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NoJugadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -71,18 +83,18 @@ public class Usuario extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
-                        .addComponent(jButton1))
+                        .addComponent(agregar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(LblNoJugador)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(NoJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(LblNombre)
                                 .addGap(29, 29, 29)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -93,15 +105,15 @@ public class Usuario extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(LblNoJugador)
                         .addGap(0, 10, Short.MAX_VALUE))
-                    .addComponent(jTextField2))
+                    .addComponent(NoJugador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LblNombre)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
 
@@ -123,13 +135,27 @@ public class Usuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        contador++;
+        if(contador<=Integer.parseInt(NoJugador.getText())){
+            mt.usuario(txtNombre.getText());
+            JOptionPane.showMessageDialog(null,"Usuario ingresado");
+            NoJugador.setVisible(false);
+            LblNoJugador.setVisible(false);
+            txtNombre.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null,"Usuarios ingresados exitosamente");
+        }
+    }//GEN-LAST:event_agregarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void NoJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoJugadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NoJugadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,12 +193,12 @@ public class Usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel LblNoJugador;
+    private javax.swing.JLabel LblNombre;
+    private javax.swing.JTextField NoJugador;
+    private javax.swing.JButton agregar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
